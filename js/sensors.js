@@ -3,14 +3,44 @@ import { camera } from './renderer.js';
 let isMobile = false;
 
 // Detectar se o dispositivo suporta DeviceOrientation
-if (window.DeviceOrientationEvent) {
-  window.addEventListener('deviceorientation', (event) => {
-    isMobile = true;
-    handleOrientation(event);
-  });
-} else {
-  console.warn('DeviceOrientationEvent não suportado. Usando interação de mouse.');
-}
+if ('DeviceOrientationEvent' in window) {
+    // Verifica se o navegador exige permissão explícita
+    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+      // Adiciona um botão ou chama a permissão no momento apropriado
+      const requestPermissionButton = document.createElement('button');
+      requestPermissionButton.innerText = 'Habilitar Orientação do Dispositivo';
+      requestPermissionButton.style.position = 'absolute';
+      requestPermissionButton.style.top = '50%';
+      requestPermissionButton.style.left = '50%';
+      requestPermissionButton.style.transform = 'translate(-50%, -50%)';
+      requestPermissionButton.style.zIndex = '1000';
+      document.body.appendChild(requestPermissionButton);
+  
+      // Evento de clique para solicitar permissão
+      requestPermissionButton.addEventListener('click', () => {
+        DeviceOrientationEvent.requestPermission()
+          .then((permissionState) => {
+            if (permissionState === 'granted') {
+              window.addEventListener('deviceorientation', handleOrientation);
+              isMobile = true;
+              document.body.removeChild(requestPermissionButton); // Remove o botão
+            } else {
+              console.warn('Permissão para DeviceOrientation negada.');
+            }
+          })
+          .catch((error) => {
+            console.error('Erro ao solicitar permissão para DeviceOrientation:', error);
+          });
+      });
+    } else {
+      // Navegadores que não exigem permissão explícita
+      window.addEventListener('deviceorientation', handleOrientation);
+      isMobile = true;
+    }
+  } else {
+    console.warn('DeviceOrientationEvent não é suportado neste dispositivo.');
+  }
+  
 
 // Função para manipular o acelerômetro (dispositivos móveis)
 function handleOrientation(event) {
