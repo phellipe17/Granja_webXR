@@ -1,11 +1,11 @@
 import { camera } from './renderer.js';
 
-let isMobile = false; // Para definir se está em um dispositivo móvel
+let isMobile = false;
 
 // Detectar se o dispositivo suporta DeviceOrientation
 if (window.DeviceOrientationEvent) {
   window.addEventListener('deviceorientation', (event) => {
-    isMobile = true; // Define como móvel se o evento for capturado
+    isMobile = true;
     handleOrientation(event);
   });
 } else {
@@ -49,3 +49,24 @@ function handleMouseMove(event) {
 // Funções para mouse
 function handleMouseDown(event) {
   isDragging = true;
+  previousMousePosition = { x: event.clientX, y: event.clientY };
+}
+
+function handleMouseUp() {
+  isDragging = false;
+}
+
+// Adicionar eventos para dispositivos não móveis
+if (!isMobile) {
+  window.addEventListener('mousedown', handleMouseDown);
+  window.addEventListener('mousemove', handleMouseMove);
+  window.addEventListener('mouseup', handleMouseUp);
+}
+
+export function enableDeviceInteraction() {
+  if (isMobile) {
+    console.log('Usando acelerômetro.');
+  } else {
+    console.log('Usando controle de mouse.');
+  }
+}
