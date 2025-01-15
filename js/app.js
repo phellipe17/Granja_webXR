@@ -1,5 +1,5 @@
 import { renderer, scene, camera } from './renderer.js';
-import { enableDeviceOrientation } from './sensors.js';
+import { enableDeviceInteraction } from './sensors.js';
 import { playVideo } from './videoHandler.js';
 
 document.getElementById('startButton').addEventListener('click', async () => {
@@ -14,16 +14,13 @@ document.getElementById('startButton').addEventListener('click', async () => {
       await body.msRequestFullscreen();
     }
 
-    // Ajustar o tamanho do renderizador para tela cheia
-    renderer.setSize(window.innerWidth, window.innerHeight);
-
     // Ocultar o botão e iniciar os recursos
     document.getElementById('info').style.display = 'none';
-    enableDeviceOrientation();
     playVideo();
-    animate(); // Inicia o loop de renderização
+    enableDeviceInteraction(); // Ativar interação
+    animate();
   } catch (error) {
-    console.error('Erro ao entrar no modo de tela cheia:', error);
+    console.error('Erro ao iniciar a experiência:', error);
   }
 });
 
