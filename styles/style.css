@@ -27,4 +27,17 @@ body {
   #startButton:hover {
     background-color: #1c86ee;
   }
+
+  h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #ddd; /* Um tom mais claro para o texto */
+    text-align: center;
+  }
+  
   
