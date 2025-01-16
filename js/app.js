@@ -124,14 +124,14 @@ function enableMouseControls() {
 
 function enableDeviceOrientation() {
   const overlay = document.getElementById('overlay'); // Pega o elemento do overlay
-
+  const betaOffset = THREE.MathUtils.degToRad(90);
   if (typeof DeviceOrientationEvent !== 'undefined') {
     console.log('DeviceOrientationEvent é suportado.');
 
     window.addEventListener('deviceorientation', (event) => {
       if (event.alpha !== null && event.beta !== null && event.gamma !== null) {
         const alpha = event.alpha.toFixed(2); // Rotação no eixo Z
-        const beta = event.beta.toFixed(2);   // Rotação no eixo X
+        const beta = event.beta.toFixed(2) +betaOffset;   // Rotação no eixo X
         const gamma = event.gamma.toFixed(2); // Rotação no eixo Y
 
         // Atualiza o texto do overlay com os valores do acelerômetro
