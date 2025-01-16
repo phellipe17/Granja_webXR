@@ -21,7 +21,7 @@ This project offers an immersive 360° experience that allows you to explore the
 ## 📱 How to Use
 
 1. Open your phone's browser (recommended: **Google Chrome** or **Safari**).
-2. Access the application URL (e.g., `https://your-username.github.io/virtual-pig-farm-tour`).
+2. Access the application URL (e.g., `https://phellipe17.github.io/Granja_webXR/`).
 3. Click the **"Start AR Experience"** button.
 4. The application will enter fullscreen mode, and the 360° video will start.
 5. Move your phone to explore all angles of the farm environment.
