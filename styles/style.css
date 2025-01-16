@@ -39,5 +39,30 @@ body {
     color: #ddd; /* Um tom mais claro para o texto */
     text-align: center;
   }
+
+  #container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  /* Ocultar elementos */
+  .hidden {
+    display: none !important;
+  }
+
+  #overlay {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+    font-size: 16px;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 9999; /* Certifica-se de que está acima do vídeo */
+  }
   
   

@@ -3,22 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tour Virtual 360°</title>
+  <title>WebXR 360 Video</title>
   <link rel="stylesheet" href="styles/style.css">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128/build/three.module.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/jsm/webxr/VRButton.js"></script>
+</head>
 </head>
 <body>
-  <div id="info">
+  <div id="container">
     <h1>Bem-vindo à Granja Carneiro</h1>
     <div style="font-size: 3em; text-align: center;">🐖</div>
     <p>Esperamos que seu tour seja especial.</p>
     <p>Aproveite essa viagem em realidade aumentada!</p>
-    <button id="startButton">Iniciar Experiência</button>
+    <button id="startButton">Entrar na Experiência</button>
   </div>
-  <script src="js/renderer.js" type="module"></script>
-  <script src="js/sensors.js" type="module"></script>
-  <script src="js/videoHandler.js" type="module"></script>
-  <script src="js/app.js" type="module"></script>
+  <div id="overlay"></div>
+  <script type="module" src="js/app.js" ></script>
 
 </body>
 </html>
