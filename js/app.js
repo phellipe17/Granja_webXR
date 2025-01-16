@@ -14,7 +14,7 @@ let previousMousePosition = { x: 0, y: 0 };
 
 // Configuração do vídeo
 const video = document.createElement('video');
-video.src = 'assets/Ex_video_360.mp4'; // Caminho do vídeo
+video.src = 'assets/slidevr.mp4'; // Caminho do vídeo
 video.crossOrigin = 'anonymous';
 video.loop = true;
 video.muted = true; // Necessário para autoplay
@@ -131,7 +131,7 @@ function enableDeviceOrientation() {
     window.addEventListener('deviceorientation', (event) => {
       if (event.alpha !== null && event.beta !== null && event.gamma !== null) {
         const alpha = (event.alpha * sensitivity).toFixed(2); // Rotação no eixo Z
-        const beta = ((event.beta - 90)* sensitivity).toFixed(2);   // Rotação no eixo X
+        const beta = (event.beta - 90).toFixed(2);   // Rotação no eixo X
         const gamma = (event.gamma * sensitivity).toFixed(2); // Rotação no eixo Y
 
         // Atualiza o texto do overlay com os valores do acelerômetro
