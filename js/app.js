@@ -124,14 +124,19 @@ function enableMouseControls() {
 
 function enableDeviceOrientation() {
   const overlay = document.getElementById('overlay'); // Pega o elemento do overlay
+  const betaOffset = THREE.MathUtils.degToRad(90);
   if (typeof DeviceOrientationEvent !== 'undefined') {
     console.log('DeviceOrientationEvent é suportado.');
 
     window.addEventListener('deviceorientation', (event) => {
       if (event.alpha !== null && event.beta !== null && event.gamma !== null) {
-        const alpha = event.alpha.toFixed(2); // Rotação no eixo Z
-        const beta = event.beta.toFixed(2) + 90;   // Rotação no eixo X
-        const gamma = event.gamma.toFixed(2); // Rotação no eixo Y
+        const alpha = THREE.MathUtils.degToRad(event.alpha || 0); // Rotação no eixo Z
+        const beta = THREE.MathUtils.degToRad(event.beta || 0) + betaOffset; // Ajuste no eixo X
+        const gamma = THREE.MathUtils.degToRad(event.gamma || 0); // Rotação no eixo Y
+
+        // Atualiza a rotação da câmera
+        const euler = new THREE.Euler(beta, alpha, -gamma, 'YXZ');
+        camera.quaternion.setFromEuler(euler);
 
         // Atualiza o texto do overlay com os valores do acelerômetro
         overlay.innerHTML = `
@@ -141,14 +146,14 @@ function enableDeviceOrientation() {
           Gamma (Y): ${gamma}°
         `;
 
-        // Atualiza a rotação da câmera
-        const euler = new THREE.Euler(
-          THREE.MathUtils.degToRad(beta),
-          THREE.MathUtils.degToRad(alpha),
-          -THREE.MathUtils.degToRad(gamma),
-          'YXZ'
-        );
-        camera.quaternion.setFromEuler(euler);
+        // // Atualiza a rotação da câmera
+        // const euler = new THREE.Euler(
+        //   THREE.MathUtils.degToRad(beta),
+        //   THREE.MathUtils.degToRad(alpha),
+        //   -THREE.MathUtils.degToRad(gamma),
+        //   'YXZ'
+        // );
+        // camera.quaternion.setFromEuler(euler);
       } else {
         console.warn('Os dados do DeviceOrientation não estão disponíveis.');
         overlay.innerHTML = 'Dados do acelerômetro não disponíveis.';
